@@ -2,11 +2,11 @@ import numpy as np
 import netCDF4 as nc
 import pylab as pl
 
-fname1 = "fengshen.nc"
-fname2 = "fungwong.nc"
+fname1 = "saomai_hgt.nc"
+fname2 = "bopha_hgt.nc"
 tc1 = nc.Dataset(fname1)
 tc2 = nc.Dataset(fname2)
-totaltime = len(tc1.variables['varcenter'])
+totaltime = len(tc1.variables['slpcenter'])
 
 
 sym1 = []
@@ -16,18 +16,18 @@ j = 0
 k = 25
 
 while i < totaltime:
-    sym1.append((tc1.variables['varcenter'][i]-tc1.variables['varmin'][i][10])/(tc1.variables['varcenter'][i]-tc1.variables['varmax'][i][10]))
+    sym1.append((tc1.variables['slpcenter'][i]-tc1.variables['slpmin'][i][12])/(tc1.variables['slpcenter'][i]-tc1.variables['slpmax'][i][12]))
     i += 1
 
 while j < totaltime:
-    sym2.append((tc2.variables['varcenter'][j]-tc2.variables['varmin'][j][10])/(tc2.variables['varcenter'][j]-tc2.variables['varmax'][j][10]))
+    sym2.append((tc2.variables['slpcenter'][j]-tc2.variables['slpmin'][j][12])/(tc2.variables['slpcenter'][j]-tc2.variables['slpmax'][j][12]))
     j += 1
 
 
 t = [i for i in range(totaltime)]            
-pl.plot(t,sym1,label = "Fengshen")
-pl.plot(t,sym2,"--",label = "Fungwong")
-pl.title("Symmetry when r=10 (fengshen & fungwong)")
+pl.plot(t,sym1,label = "Saomai")
+pl.plot(t,sym2,"--",label = "Bopha")
+pl.title("Symmetry when r=10 (Saomai & Bopha)")
 pl.xlabel("Time")
 pl.ylabel("Symmetry")
 pl.legend(loc = 'bottom left')
